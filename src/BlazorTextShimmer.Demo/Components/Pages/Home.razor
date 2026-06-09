@@ -1,0 +1,71 @@
+﻿@page "/"
+
+<PageTitle>Blazor Text Shimmer</PageTitle>
+
+<div class="demo">
+    <header class="demo-header">
+        <TextShimmer As="h1" Text="Blazor Text Shimmer" Duration="2.4" Spread="1.2" ForceAnimation="true" />
+        <p class="subtitle">A native, pure-CSS animated shimmer component for Blazor.</p>
+    </header>
+
+    <p class="note">
+        These examples set <code>ForceAnimation="true"</code> so the effect is visible even when
+        your system has <em>reduced motion</em> enabled. Without it, the component respects that
+        preference and shows a static, dim state.
+    </p>
+
+    <section>
+        <h2>Basic usage</h2>
+        <div class="panel">
+            <TextShimmer Text="This text has a shimmer effect" ForceAnimation="true" />
+        </div>
+        <pre><code>&lt;TextShimmer Text="This text has a shimmer effect" /&gt;</code></pre>
+    </section>
+
+    <section>
+        <h2>Different durations</h2>
+        <div class="panel stack">
+            <TextShimmer Text="Fast - loading quickly..." Duration="1" ForceAnimation="true" />
+            <TextShimmer Text="Default - loading at normal speed..." Duration="2" ForceAnimation="true" />
+            <TextShimmer Text="Slow - loading slowly..." Duration="4" ForceAnimation="true" />
+            <TextShimmer Text="Very slow - loading very slowly..." Duration="6" ForceAnimation="true" />
+        </div>
+    </section>
+
+    <section>
+        <h2>Spread (band width scales with text length)</h2>
+        <div class="panel stack">
+            <TextShimmer Text="Tight, narrow shimmer band" Spread="0.6" ForceAnimation="true" />
+            <TextShimmer Text="Default shimmer band" Spread="2" ForceAnimation="true" />
+            <TextShimmer Text="Wide, broad shimmer band" Spread="4" ForceAnimation="true" />
+        </div>
+    </section>
+
+    <section>
+        <h2>Custom elements</h2>
+        <div class="panel stack">
+            <TextShimmer As="h2" Text="Rendered as a heading" ForceAnimation="true" />
+            <span>
+                Inline: <TextShimmer As="span" Text="processing your request with AI magic..." ForceAnimation="true" />
+            </span>
+            <TextShimmer As="div" Text="Rendered as a div" ForceAnimation="true" />
+        </div>
+    </section>
+
+    <section>
+        <h2>Custom colors</h2>
+        <div class="panel stack on-dark">
+            <TextShimmer Text="Custom gradient color" BaseColor="#3f3f46" GradientColor="#22d3ee" ForceAnimation="true" />
+            <TextShimmer Text="Warm shimmer tones" BaseColor="#7c2d12" GradientColor="#fb923c" ForceAnimation="true" />
+        </div>
+    </section>
+
+    <section>
+        <h2>Rich content via ChildContent</h2>
+        <div class="panel">
+            <TextShimmer As="span" ContentLength="22" Duration="3" ForceAnimation="true">
+                Thinking <strong>really</strong> hard…
+            </TextShimmer>
+        </div>
+    </section>
+</div>

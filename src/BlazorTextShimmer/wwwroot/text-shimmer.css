@@ -1,0 +1,69 @@
+/*
+ * BlazorTextShimmer
+ * A pure-CSS animated text shimmer effect.
+ *
+ * Technique: the text is painted transparent and clipped to a background
+ * gradient (`background-clip: text`). The gradient is a dim "base" color with a
+ * brighter "highlight" band in the middle. The gradient image is twice the
+ * width of the element and tiles seamlessly, and we animate `background-position`
+ * so the highlight sweeps across the text and loops forever.
+ *
+ * Per-instance values are supplied via CSS custom properties set inline by the
+ * component:
+ *   --bts-spread             half-width of the highlight band (px)
+ *   --bts-duration           one full sweep duration (e.g. "2s")
+ *   --bts-base-color         dim/resting text color
+ *   --bts-gradient-color     bright highlight color
+ */
+
+.blazor-text-shimmer {
+    /* sensible fallbacks; overridden inline per instance */
+    --bts-base-color: #a1a1aa;
+    --bts-gradient-color: #18181b;
+    --bts-spread: 40px;
+    --bts-duration: 2s;
+
+    display: inline-block;
+    margin: 0;
+
+    /* A dim base with a bright band centered in each tile. The band edges are
+       offset from the center by --bts-spread, so wider spread = broader shine. */
+    background-image: linear-gradient(
+        90deg,
+        var(--bts-base-color) 0%,
+        var(--bts-base-color) calc(50% - var(--bts-spread)),
+        var(--bts-gradient-color) 50%,
+        var(--bts-base-color) calc(50% + var(--bts-spread)),
+        var(--bts-base-color) 100%
+    );
+    /* Image is 2x wide and tiles, so the sweep loops seamlessly. */
+    background-size: 200% 100%;
+    background-position: 100% 50%;
+
+    /* Clip the gradient to the shape of the text. */
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    animation: blazor-text-shimmer-move var(--bts-duration) linear infinite;
+}
+
+@keyframes blazor-text-shimmer-move {
+    from {
+        background-position: 100% 50%;
+    }
+    to {
+        /* Travel exactly one tile width (200% of the element) for a seamless loop. */
+        background-position: -100% 50%;
+    }
+}
+
+/* Respect users who prefer reduced motion: show the resting (dim) state.
+   Instances that opt out (data-bts-force-motion) keep animating. */
+@media (prefers-reduced-motion: reduce) {
+    .blazor-text-shimmer:not([data-bts-force-motion]) {
+        animation: none;
+        background-image: linear-gradient(var(--bts-base-color), var(--bts-base-color));
+    }
+}

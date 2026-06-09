@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="BlazorTextShimmer/BlazorTextShimmer.csproj" />
+  <Project Path="BlazorTextShimmer.Demo/BlazorTextShimmer.Demo.csproj" />
+</Solution>
