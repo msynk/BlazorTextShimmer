@@ -1,3 +1,7 @@
+**Note**: moved to bit BlazorUI (https://blazorui.bitplatform.dev)
+
+---
+
 # Blazor Text Shimmer
 
 A native Blazor component that renders an animated **text shimmer** - a bright
